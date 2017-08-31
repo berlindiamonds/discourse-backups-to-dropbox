@@ -39,7 +39,7 @@ module DiscourseBackupToDropbox
     end
 
     def upload_unique_files(folder_name, dbx_files)
-      ([backup] - dbx_files).each do |f|
+      (backup - dbx_files).each do |f|
         if f.present?
           full_path  = f.path
           filename   = f.filename
