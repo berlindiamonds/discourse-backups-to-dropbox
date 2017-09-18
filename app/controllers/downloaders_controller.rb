@@ -5,7 +5,7 @@ class DownloadersController < Admin::AdminController
   requires_plugin 'discourse-sync-to-dropbox'
 
   def index
-    dbx_list = DiscourseDownloadFromDrive::DropboxDownloader.new(nil).json_list
+    dbx_list = DiscourseDownloadFromDropbox::DropboxDownloader.new(nil).json_list
     render json: dbx_list
   end
 
