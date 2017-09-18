@@ -34,7 +34,7 @@ module DiscourseDownloadFromDropbox
       file_path = found.first.path_display
       path = File.join(Backup.base_directory, file_title)
       dbx_backup = dbx.download(file_path)
-      dbx_backup.save("#{path}")
+      dbx_backup.to_s
       path
     end
 
