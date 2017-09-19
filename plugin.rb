@@ -20,8 +20,15 @@ enabled_site_setting :discourse_sync_to_dropbox_enabled
 after_initialize do
   load File.expand_path("../app/jobs/regular/sync_backups_to_dropbox.rb", __FILE__)
   load File.expand_path("../lib/dropbox_synchronizer.rb", __FILE__)
+  load File.expand_path("../lib/dropbox_downloader.rb", __FILE__)
+  load File.expand_path("../app/controllers/downloaders_controller.rb", __FILE__)
 
   DiscourseEvent.on(:backup_created) do
     Jobs.enqueue(:sync_backups_to_dropbox)
+  end
+
+  Discourse::Application.routes.append do
+    get "/admin/plugins/discourse-sync-to-dropbox/downloader" => "downloaders#index"
+    put "/admin/plugins/discourse-sync-to-dropbox/downloader/:file_id" => "downloaders#create"
   end
 end
