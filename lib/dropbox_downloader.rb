@@ -32,7 +32,7 @@ module DiscourseDownloadFromDropbox
     def download
       found = dbx_files.select { |f| f.id == file_id }
       file_path = found.first.path_display
-      path = File.join(Backup.base_directory, file_title)
+      path = File.join(Backup.base_directory, found[0].name )
       dbx_backup = dbx.download(file_path)
       dbx_backup.to_s
       path
