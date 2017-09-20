@@ -30,5 +30,6 @@ after_initialize do
   Discourse::Application.routes.append do
     get "/admin/plugins/discourse-sync-to-dropbox/downloader" => "downloaders#index"
     put "/admin/plugins/discourse-sync-to-dropbox/downloader/:file_id" => "downloaders#create"
+    get "admin/plugins/discourse-backups-to-dropbox/downloader/:file_id" => "downloaders#show"
   end
 end

@@ -19,7 +19,7 @@ module DiscourseDownloadFromDropbox
 
     def dbx_files
       folder_name = Discourse.current_hostname
-      dbx_files = dbx.list_folder("/#{folder_name}")
+      @dbx_files ||= dbx.list_folder("/#{folder_name}")
     end
 
     def json_list
@@ -34,8 +34,12 @@ module DiscourseDownloadFromDropbox
       file_path = found.first.path_display
       path = File.join(Backup.base_directory, found[0].name )
       dbx_backup = dbx.download(file_path)
-      dbx_backup.to_s
+      dbx_backup[1].to_s
       path
+    end
+
+    def filename
+      @filename ||= dbx_files.select { |f| f.id == file_id }.first.name
     end
 
   end
