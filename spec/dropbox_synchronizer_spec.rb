@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe ::DiscourseBackupToDropbox::DropboxSynchronizer do
 
   let(:backup) { Backup.new('backup') }
